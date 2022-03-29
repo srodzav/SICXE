@@ -15,3 +15,5 @@
 - Implementacion de directiva EQU, ORG, USE
 - Bloques
 - Cargador a memoria
+
+  
