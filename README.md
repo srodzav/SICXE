@@ -1,5 +1,3 @@
-# SICXE
-
 ## Componentes
 
 ###### Paso 1
