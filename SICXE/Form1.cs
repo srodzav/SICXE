@@ -16,6 +16,9 @@ using System.Web;
 
 namespace SICXE
 {
+
+    #region VALORES
+
     public enum Instrucciones
     { // Valor CodOp en DECIMAL
         ADD = 24, ADDF = 88, ADDR = 144, AND = 64, CLEAR = 180, COMP = 40, COMPF = 136, COMPR = 160, DIV = 36,
@@ -36,8 +39,13 @@ namespace SICXE
         START, END, BYTE, WORD, RESB, RESW
     }
 
+    #endregion
+
     public partial class Form1 : Form
     {
+
+        #region INSTRUCCIONES
+
         public List<string> Instr1 = new List<string>
         { // Instrucciones Formato 1
             "FIX", "FLOAT", "HIO", "NORM", "SIO", "TIO"
@@ -83,6 +91,8 @@ namespace SICXE
         {
              "WORD", "BYTE", "BASE"
         };
+
+        #endregion
 
         #region VARIABLES
 
@@ -136,6 +146,8 @@ namespace SICXE
                 dataGridTabSim.Rows.Clear();
                 tbErrores.Clear();
                 tbRegistros.Clear();
+
+                btnsArchivo(true, true, true, true, true, true);
             }
             paso1ToolStripMenuItem.Enabled = true;
         }
@@ -156,9 +168,67 @@ namespace SICXE
             tbErrores.Clear();
             tbRegistros.Clear();
             paso1ToolStripMenuItem.Enabled = true;
+            btnsArchivo(true,true,true,true,true,true);
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ruta != null)
+            {
+                File.WriteAllLines(ruta + @"\" + nombre + ".s", tbPrograma.Lines);
+                tbPrograma.DeselectAll();
+            }
+            else
+            {
+                guardarComoToolStripMenuItem.PerformClick();
+            }
+        }
+
+        private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog
+            {
+                InitialDirectory = Application.StartupPath + "\\example",
+                Filter = "SICXE|*.s"
+            };
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllLines(save.FileName, tbPrograma.Lines);
+                tbPrograma.DeselectAll();
+                string[] files = save.FileName.Split((char)92);
+                string[] file = files[files.Length - 1].Split('.');
+                nombre = file[0];
+                ruta = Directory.GetParent(save.FileName).ToString();
+            }
+        }
+
+        private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tbPrograma.Text = "";
+            tbLinea.Text = "";
+            tbErrores.Text = "";
+            nombre = "";
+            LongitudPrograma.Text = "";
+            intermedio.Rows.Clear();
+            dataGridTabSim.Rows.Clear();
+            tbErrores.Clear();
+            tbRegistros.Clear();
+
+            btnsArchivo(true, true, false, false, false, true);
+            tbPrograma.Enabled = false;
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e) => Close();
+
+        private void btnsArchivo(bool nuevo, bool abrir, bool guardar, bool guardarComo, bool cerrar, bool salir)
+        {
+            nuevoToolStripMenuItem.Enabled = nuevo;
+            abrirToolStripMenuItem.Enabled = abrir;
+            guardarToolStripMenuItem.Enabled = guardar;
+            guardarComoToolStripMenuItem.Enabled = guardarComo;
+            cerrarToolStripMenuItem.Enabled = cerrar;
+            salirToolStripMenuItem.Enabled = salir;
+        }
 
         private void tbPrograma_TextChanged(object sender, EventArgs e)
         {
@@ -170,11 +240,27 @@ namespace SICXE
                 cont++;
             }
         }
-        
+
+        private void btnEnsamblar_Click(object sender, EventArgs e)
+        {
+            analizaCodigo();
+            generaArchivo();
+            codigoObjeto();
+            generaRegistros();
+        }
+
+
         #endregion
+
+        #region PASO 1
 
         private void analizarCódigoToolStripMenuItem_Click(object sender, EventArgs e)
         { // GENERA ERRORES A LA HORA DE ANALIZAR CÓDIGO
+            analizaCodigo();
+        }
+
+        private void analizaCodigo()
+        {
             if (tbPrograma.Text != "")
             {
                 int cont = 1;
@@ -231,6 +317,11 @@ namespace SICXE
 
         private void generarArchivoIntermedioToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            generaArchivo();
+        }
+
+        private void generaArchivo()
+        {
             // Definir la estructura del DataGridView
             intermedio.RowHeadersWidth = 60;
             dataGridTabSim.Rows.Clear();
@@ -268,9 +359,12 @@ namespace SICXE
                     { // Si es una directiva evalua individualmente
                         if (prog.lineas[i].CodigoOp == "BYTE")
                         { // En caso de que sea BYTE
-                            if (prog.lineas[i].Operando.Contains("X")) { // Si es X, divide el total y lo redondea hacia arriba
-                                contador += (int)Math.Ceiling(((double)prog.lineas[i].CodigoOp.Length)/ 2);
-                            } else if (prog.lineas[i].Operando.Contains("C")) { // Si es C, agrega el total de bytes
+                            if (prog.lineas[i].Operando.Contains("X"))
+                            { // Si es X, divide el total y lo redondea hacia arriba
+                                contador += (int)Math.Ceiling(((double)prog.lineas[i].CodigoOp.Length) / 2);
+                            }
+                            else if (prog.lineas[i].Operando.Contains("C"))
+                            { // Si es C, agrega el total de bytes
                                 contador += (prog.lineas[i].Operando.Length - 3);
                             }
                         }
@@ -341,10 +435,18 @@ namespace SICXE
             códigoObjetoToolStripMenuItem.Enabled = true;
 
             #endregion
-
         }
 
+        #endregion
+
+        #region PASO 2
+
         private void códigoObjetoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            codigoObjeto();
+        }
+
+        private void codigoObjeto()
         {
             int contador = prog.lineas[0].Operando.ToDec();
             for (int i = 0; i < prog.lineas.Count; i++)
@@ -360,7 +462,7 @@ namespace SICXE
                             {
                                 if (prog.lineas[i].CodigoOp == instr.ToString())
                                 {
-                                    intermedio.Rows[i].Cells[4].Value =  instr.GetHashCode().ToString("X");
+                                    intermedio.Rows[i].Cells[4].Value = instr.GetHashCode().ToString("X");
                                 }
                             }
                         }
@@ -492,7 +594,6 @@ namespace SICXE
             generarRegistrosToolStripMenuItem.Enabled = true;
 
             #endregion
-
         }
 
         private void CodigoObjetoPaso2(string ins, string op, string n, string i, string x, string b, string p, string e, int cont, bool indexado)
@@ -939,6 +1040,11 @@ namespace SICXE
         
         private void generarRegistrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            generaRegistros();
+        }
+
+        private void generaRegistros()
+        {
             RegistroH();
             RegistroT();
             RegistroM();
@@ -985,6 +1091,7 @@ namespace SICXE
             List<string> T = new List<string>();
             List<string> DirT = new List<string>();
             string RegistroT = "";
+            string temp;
 
             foreach (DataGridViewRow row in intermedio.Rows)
             {
@@ -1003,7 +1110,12 @@ namespace SICXE
                                 if (row.Cells[4].Value.ToString().Contains("Error: Simbolo no existe"))
                                     RegistroT += row.Cells[4].Value.ToString().Substring(0, row.Cells[4].Value.ToString().Length - 29);
                                 else
-                                    RegistroT += row.Cells[4].Value.ToString();
+                                {
+                                    temp = row.Cells[4].Value.ToString();
+                                    temp = temp.Replace("*", "");
+                                    MessageBox.Show(temp);
+                                    RegistroT += temp;
+                                }
                             }
                             else
                             {
@@ -1116,5 +1228,8 @@ namespace SICXE
                 }
             }
         }
+
+        #endregion
+
     }
 }
