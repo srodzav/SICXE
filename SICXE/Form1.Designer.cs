@@ -421,7 +421,7 @@
             // 
             // btnEnsamblar
             // 
-            this.btnEnsamblar.Location = new System.Drawing.Point(12, 620);
+            this.btnEnsamblar.Location = new System.Drawing.Point(12, 619);
             this.btnEnsamblar.Name = "btnEnsamblar";
             this.btnEnsamblar.Size = new System.Drawing.Size(246, 23);
             this.btnEnsamblar.TabIndex = 21;
