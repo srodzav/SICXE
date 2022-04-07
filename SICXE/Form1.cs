@@ -97,7 +97,7 @@ namespace SICXE
         #region VARIABLES
 
         // PRE PROGRAMA
-        public string nombre, ruta;
+        public string nombre="EJEMPLO", ruta=" ";
         private Programa prog;
         // PASO 1
         public string CP;
@@ -150,6 +150,7 @@ namespace SICXE
                 btnsArchivo(true, true, true, true, true, true);
             }
             paso1ToolStripMenuItem.Enabled = true;
+            btnEnsamblar.Enabled = true;
         }
 
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,6 +170,7 @@ namespace SICXE
             tbRegistros.Clear();
             paso1ToolStripMenuItem.Enabled = true;
             btnsArchivo(true,true,true,true,true,true);
+            btnEnsamblar.Enabled = false;
         }
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -182,6 +184,7 @@ namespace SICXE
             {
                 guardarComoToolStripMenuItem.PerformClick();
             }
+            btnEnsamblar.Enabled = true;
         }
 
         private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -200,6 +203,7 @@ namespace SICXE
                 nombre = file[0];
                 ruta = Directory.GetParent(save.FileName).ToString();
             }
+            btnEnsamblar.Enabled = true;
         }
 
         private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -243,10 +247,10 @@ namespace SICXE
 
         private void btnEnsamblar_Click(object sender, EventArgs e)
         {
-            analizaCodigo();
-            generaArchivo();
-            codigoObjeto();
-            generaRegistros();
+            analizarCódigoToolStripMenuItem.PerformClick();
+            generarArchivoIntermedioToolStripMenuItem.PerformClick();
+            códigoObjetoToolStripMenuItem.PerformClick();
+            generarRegistrosToolStripMenuItem.PerformClick();
         }
 
 
@@ -256,11 +260,6 @@ namespace SICXE
 
         private void analizarCódigoToolStripMenuItem_Click(object sender, EventArgs e)
         { // GENERA ERRORES A LA HORA DE ANALIZAR CÓDIGO
-            analizaCodigo();
-        }
-
-        private void analizaCodigo()
-        {
             if (tbPrograma.Text != "")
             {
                 int cont = 1;
@@ -317,11 +316,6 @@ namespace SICXE
 
         private void generarArchivoIntermedioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            generaArchivo();
-        }
-
-        private void generaArchivo()
-        {
             // Definir la estructura del DataGridView
             intermedio.RowHeadersWidth = 60;
             dataGridTabSim.Rows.Clear();
@@ -361,7 +355,7 @@ namespace SICXE
                         { // En caso de que sea BYTE
                             if (prog.lineas[i].Operando.Contains("X"))
                             { // Si es X, divide el total y lo redondea hacia arriba
-                                contador += (int)Math.Ceiling(((double)prog.lineas[i].CodigoOp.Length) / 2);
+                                contador += (int)Math.Ceiling(((double)prog.lineas[i].Operando.Length-3) / 2);
                             }
                             else if (prog.lineas[i].Operando.Contains("C"))
                             { // Si es C, agrega el total de bytes
@@ -442,11 +436,6 @@ namespace SICXE
         #region PASO 2
 
         private void códigoObjetoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            codigoObjeto();
-        }
-
-        private void codigoObjeto()
         {
             int contador = prog.lineas[0].Operando.ToDec();
             for (int i = 0; i < prog.lineas.Count; i++)
@@ -562,6 +551,7 @@ namespace SICXE
                 }
                 else
                 {
+                    MessageBox.Show(prog.lineas[i].CodigoOp);
                     if (Instr1.Contains(prog.lineas[i].CodigoOp) || Instr2.Contains(prog.lineas[i].CodigoOp) || Instr3.Contains(prog.lineas[i].CodigoOp) || Instr4.Contains(prog.lineas[i].CodigoOp) || Directivas.Contains(prog.lineas[i].CodigoOp))
                     {
                         intermedio.Rows[i].Cells[4].Value = "Error: Sintaxis";
@@ -1037,13 +1027,10 @@ namespace SICXE
             }
             return res;
         }
-        
-        private void generarRegistrosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            generaRegistros();
-        }
 
-        private void generaRegistros()
+        #region REGISTROS
+
+        private void generarRegistrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RegistroH();
             RegistroT();
@@ -1113,7 +1100,7 @@ namespace SICXE
                                 {
                                     temp = row.Cells[4].Value.ToString();
                                     temp = temp.Replace("*", "");
-                                    MessageBox.Show(temp);
+                                    //MessageBox.Show(temp);
                                     RegistroT += temp;
                                 }
                             }
@@ -1228,6 +1215,8 @@ namespace SICXE
                 }
             }
         }
+
+        #endregion
 
         #endregion
 

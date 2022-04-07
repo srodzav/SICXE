@@ -421,6 +421,7 @@
             // 
             // btnEnsamblar
             // 
+            this.btnEnsamblar.Enabled = false;
             this.btnEnsamblar.Location = new System.Drawing.Point(12, 619);
             this.btnEnsamblar.Name = "btnEnsamblar";
             this.btnEnsamblar.Size = new System.Drawing.Size(246, 23);
