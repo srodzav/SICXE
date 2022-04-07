@@ -375,7 +375,7 @@ namespace SICXE
                             contador += prog.lineas[i].Operando.ToDec() * 3;
                         }
                     }
-                    if (prog.lineas[i].Etiqueta != null && prog.lineas[i].Etiqueta != "" && prog.lineas[i].Etiqueta != " " && i != 0)
+                    if (prog.lineas[i].Etiqueta != null && prog.lineas[i].Etiqueta != "" && prog.lineas[i].Etiqueta != " " && i != 0 && !Instr3.Contains(prog.lineas[i].CodigoOp) && !Instr2.Contains(prog.lineas[i].CodigoOp) && !Instr1.Contains(prog.lineas[i].CodigoOp))//Agregar que no sea Instruccion o directiva
                     { // Si etiqueta contiene algo y no es el nombre del programa, lo agrega al TabSim
                         dataGridTabSim.Rows.Add(prog.lineas[i].Etiqueta, CP);
                     }
@@ -543,6 +543,14 @@ namespace SICXE
                                 }
                             }
                         }
+                        else
+                        {
+                            //No entro a ningun If de instruccion por lo tanto no existe
+                            intermedio.Rows[i].Cells[4].Value = "----";
+                            intermedio.Rows[i].Cells[5].Value = "Error: Instruccion no existe";
+                            
+                        }
+                        
                     }
                     else
                     {
