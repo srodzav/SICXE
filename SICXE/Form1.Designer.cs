@@ -65,6 +65,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbRegistros = new System.Windows.Forms.TextBox();
             this.btnEnsamblar = new System.Windows.Forms.Button();
+            this.cargadorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simuladorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTabSim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intermedio)).BeginInit();
@@ -142,7 +144,9 @@
             this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.paso1ToolStripMenuItem,
-            this.paso2ToolStripMenuItem});
+            this.paso2ToolStripMenuItem,
+            this.cargadorToolStripMenuItem,
+            this.simuladorToolStripMenuItem});
             this.Menu.Location = new System.Drawing.Point(0, 0);
             this.Menu.Name = "Menu";
             this.Menu.Size = new System.Drawing.Size(1145, 24);
@@ -188,7 +192,7 @@
             // 
             this.códigoObjetoToolStripMenuItem.Enabled = false;
             this.códigoObjetoToolStripMenuItem.Name = "códigoObjetoToolStripMenuItem";
-            this.códigoObjetoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.códigoObjetoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.códigoObjetoToolStripMenuItem.Text = "Código Objeto";
             this.códigoObjetoToolStripMenuItem.Click += new System.EventHandler(this.códigoObjetoToolStripMenuItem_Click);
             // 
@@ -196,7 +200,7 @@
             // 
             this.generarRegistrosToolStripMenuItem.Enabled = false;
             this.generarRegistrosToolStripMenuItem.Name = "generarRegistrosToolStripMenuItem";
-            this.generarRegistrosToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.generarRegistrosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.generarRegistrosToolStripMenuItem.Text = "Generar Registros";
             this.generarRegistrosToolStripMenuItem.Click += new System.EventHandler(this.generarRegistrosToolStripMenuItem_Click);
             // 
@@ -430,6 +434,20 @@
             this.btnEnsamblar.UseVisualStyleBackColor = true;
             this.btnEnsamblar.Click += new System.EventHandler(this.btnEnsamblar_Click);
             // 
+            // cargadorToolStripMenuItem
+            // 
+            this.cargadorToolStripMenuItem.Enabled = false;
+            this.cargadorToolStripMenuItem.Name = "cargadorToolStripMenuItem";
+            this.cargadorToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.cargadorToolStripMenuItem.Text = "Cargador";
+            // 
+            // simuladorToolStripMenuItem
+            // 
+            this.simuladorToolStripMenuItem.Enabled = false;
+            this.simuladorToolStripMenuItem.Name = "simuladorToolStripMenuItem";
+            this.simuladorToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.simuladorToolStripMenuItem.Text = "Simulador";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -498,6 +516,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem cerrarToolStripMenuItem;
         private System.Windows.Forms.Button btnEnsamblar;
+        private System.Windows.Forms.ToolStripMenuItem cargadorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem simuladorToolStripMenuItem;
     }
 }
 
