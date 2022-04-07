@@ -316,6 +316,7 @@ namespace SICXE
 
         private void generarArchivoIntermedioToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool BandRep = false;//Bandera para ver si un simbolo ya estaba antes en TABSIM
             // Definir la estructura del DataGridView
             intermedio.RowHeadersWidth = 60;
             dataGridTabSim.Rows.Clear();
@@ -327,25 +328,26 @@ namespace SICXE
             //Recorrido principal
             for (int i = 0; i < prog.lineas.Count; i++)
             {
+                BandRep = false;
                 CP = contador.ToHex();
                 OperandoMod = prog.lineas[i].Operando;
                 intermedio.Rows.Add(CP, prog.lineas[i].Etiqueta, prog.lineas[i].CodigoOp, OperandoMod);
 
                 if (!prog.lineas[i].Error)
                 { // Si no hay error se aumenta el contador dependiendo de que formato es la instruccion
-                    if (Instr4.Contains(prog.lineas[i].CodigoOp))
+                    if (Instr4.Contains(prog.lineas[i].CodigoOp) && !Instr4.Contains(prog.lineas[i].Etiqueta))
                     {
                         contador += 4;
                     }
-                    else if (Instr3.Contains(prog.lineas[i].CodigoOp))
+                    else if (Instr3.Contains(prog.lineas[i].CodigoOp) && !Instr3.Contains(prog.lineas[i].Etiqueta))
                     {
                         contador += 3;
                     }
-                    else if (Instr2.Contains(prog.lineas[i].CodigoOp))
+                    else if (Instr2.Contains(prog.lineas[i].CodigoOp) && !Instr2.Contains(prog.lineas[i].Etiqueta))
                     {
                         contador += 2;
                     }
-                    else if (Instr1.Contains(prog.lineas[i].CodigoOp))
+                    else if (Instr1.Contains(prog.lineas[i].CodigoOp) && !Instr1.Contains(prog.lineas[i].Etiqueta))
                     {
                         contador += 1;
                     }
@@ -375,9 +377,31 @@ namespace SICXE
                             contador += prog.lineas[i].Operando.ToDec() * 3;
                         }
                     }
-                    if (prog.lineas[i].Etiqueta != null && prog.lineas[i].Etiqueta != "" && prog.lineas[i].Etiqueta != " " && i != 0 && !Instr3.Contains(prog.lineas[i].CodigoOp) && !Instr2.Contains(prog.lineas[i].CodigoOp) && !Instr1.Contains(prog.lineas[i].CodigoOp))//Agregar que no sea Instruccion o directiva
-                    { // Si etiqueta contiene algo y no es el nombre del programa, lo agrega al TabSim
-                        dataGridTabSim.Rows.Add(prog.lineas[i].Etiqueta, CP);
+                    if (prog.lineas[i].Etiqueta != null && prog.lineas[i].Etiqueta != "" && prog.lineas[i].Etiqueta != " " && i != 0 && !Instr4.Contains(prog.lineas[i].Etiqueta) && !Instr3.Contains(prog.lineas[i].Etiqueta) && !Instr2.Contains(prog.lineas[i].Etiqueta) && !Instr1.Contains(prog.lineas[i].Etiqueta))//Agregar que no sea Instruccion o directiva
+                    { // Si etiqueta contiene algo y no es el nombre del programa, lo agrega al TabSim y que no este repetido
+                        foreach (DataGridViewRow row in dataGridTabSim.Rows)//Este for each recorre la tabim para ver que la etiqueta no se repita
+                        {
+                            if (row.Cells[0].Value.ToString() == prog.lineas[i].Etiqueta)
+                            {
+                                BandRep = true;
+                                break;
+                            }
+                        }
+                        if(BandRep == false)
+                        {
+                            dataGridTabSim.Rows.Add(prog.lineas[i].Etiqueta, CP);
+                        }
+                        else
+                        {
+                            intermedio.Rows[i].Cells[5].Value = "Error: Simbolo duplicado";
+                        }
+                    }
+                    else
+                    {
+                        if(prog.lineas[i].Etiqueta != null && prog.lineas[i].Etiqueta != "" && prog.lineas[i].Etiqueta != " " && i != 0 && !Instr4.Contains(prog.lineas[i].Etiqueta) && (Instr3.Contains(prog.lineas[i].Etiqueta) || Instr1.Contains(prog.lineas[i].Etiqueta)))
+                        {
+                            intermedio.Rows[i].Cells[5].Value = "Error: Sintaxis";
+                        }
                     }
                 }
             }
@@ -562,11 +586,13 @@ namespace SICXE
                     MessageBox.Show(prog.lineas[i].CodigoOp);
                     if (Instr1.Contains(prog.lineas[i].CodigoOp) || Instr2.Contains(prog.lineas[i].CodigoOp) || Instr3.Contains(prog.lineas[i].CodigoOp) || Instr4.Contains(prog.lineas[i].CodigoOp) || Directivas.Contains(prog.lineas[i].CodigoOp))
                     {
-                        intermedio.Rows[i].Cells[4].Value = "Error: Sintaxis";
+                        intermedio.Rows[i].Cells[4].Value = "----";
+                        intermedio.Rows[i].Cells[5].Value = "Error: Sintaxis";
                     }
                     else
                     {
-                        intermedio.Rows[i].Cells[4].Value = "Error: Instruccion no existe";
+                        intermedio.Rows[i].Cells[4].Value = "----";
+                        intermedio.Rows[i].Cells[5].Value = "Error: Instruccion no existe";
                     }
                 }
             }
