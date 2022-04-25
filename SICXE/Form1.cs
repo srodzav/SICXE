@@ -74,7 +74,7 @@ namespace SICXE
 
         public List<string> Directivas = new List<string>
         {
-             "START", "END", "BYTE", "WORD", "RESB", "RESW", "BASE"
+             "START", "END", "BYTE", "WORD", "RESB", "RESW", "BASE", "EQU"
         };
 
         public List<string> Registros = new List<string>
@@ -84,7 +84,7 @@ namespace SICXE
 
         public List<string> NoCODOP = new List<string>
         {
-             "START", "END", "RESB", "RESW", "BASE"
+             "START", "END", "RESB", "RESW", "BASE", "EQU"
         };
 
         public List<string> SiCODOP = new List<string>
@@ -97,11 +97,13 @@ namespace SICXE
         #region VARIABLES
 
         // PRE PROGRAMA
-        public string nombre="EJEMPLO", ruta=" ";
+        public string nombre = "EJEMPLO", ruta = " ";
         private Programa prog;
         // PASO 1
         public string CP;
+        public string TIPO;
         public string OperandoMod;
+        public int ABSOLREL;
         private int LongPrograma;
         // PASO 2
         public string n, i, x, b, p, e;
@@ -376,6 +378,18 @@ namespace SICXE
                         { // Si es RESW multiplica por 3 y convierte a Hexadecimal para agregarlo
                             contador += prog.lineas[i].Operando.ToDec() * 3;
                         }
+                        else if (prog.lineas[i].CodigoOp == "EQU")
+                        { // Si es EQU, evalua todo
+                            if (int.TryParse(prog.lineas[i].Operando, out ABSOLREL))
+                            {
+                                prog.lineas[i].Tipo = "Absoluto";
+                            }
+                            else
+                            {
+                                if (prog.lineas[i].Operando == "*")
+                                    prog.lineas[i].Tipo = "Relativo";
+                            }
+                        }
                     }
                     if (prog.lineas[i].Etiqueta != null && prog.lineas[i].Etiqueta != "" && prog.lineas[i].Etiqueta != " " && i != 0 && !Instr4.Contains(prog.lineas[i].Etiqueta) && !Instr3.Contains(prog.lineas[i].Etiqueta) && !Instr2.Contains(prog.lineas[i].Etiqueta) && !Instr1.Contains(prog.lineas[i].Etiqueta))//Agregar que no sea Instruccion o directiva
                     { // Si etiqueta contiene algo y no es el nombre del programa, lo agrega al TabSim y que no este repetido
@@ -389,7 +403,7 @@ namespace SICXE
                         }
                         if(BandRep == false)
                         {
-                            dataGridTabSim.Rows.Add(prog.lineas[i].Etiqueta, CP);
+                            dataGridTabSim.Rows.Add(prog.lineas[i].Etiqueta, CP, prog.lineas[i].Tipo);
                         }
                         else
                         {
@@ -583,7 +597,7 @@ namespace SICXE
                 }
                 else
                 {
-                    MessageBox.Show(prog.lineas[i].CodigoOp);
+                    //MessageBox.Show(prog.lineas[i].CodigoOp);
                     if (Instr1.Contains(prog.lineas[i].CodigoOp) || Instr2.Contains(prog.lineas[i].CodigoOp) || Instr3.Contains(prog.lineas[i].CodigoOp) || Instr4.Contains(prog.lineas[i].CodigoOp) || Directivas.Contains(prog.lineas[i].CodigoOp))
                     {
                         intermedio.Rows[i].Cells[4].Value = "----";

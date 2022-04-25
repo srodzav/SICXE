@@ -110,6 +110,20 @@ public interface IGramaticaVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitInstr_args2([NotNull] GramaticaParser.Instr_args2Context context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="GramaticaParser.exp"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExp([NotNull] GramaticaParser.ExpContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="GramaticaParser.exp2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExp2([NotNull] GramaticaParser.Exp2Context context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="GramaticaParser.directive_args"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

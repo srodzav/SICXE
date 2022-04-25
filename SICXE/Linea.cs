@@ -22,6 +22,7 @@ namespace SICXE {
 		public string Etiqueta { get; set; }
 		public string CodigoOp { get; set; }
 		public string Operando { get; set; }
+        public string Tipo { get; set; }
         public bool Error { get; set; }
         public string TipoError { get; set; }
         public string n { get; set; }
@@ -62,6 +63,8 @@ namespace SICXE {
             lin.Replace("\t", " ");
             lin = Regex.Replace(lin, @"\s+", " ");
             string[] valores = lin.Split(' ');
+
+            MessageBox.Show(valores[1]);
 
             if (Instr3.Contains(valores[1]))
             {

@@ -179,6 +179,32 @@ public partial class GramaticaBaseListener : IGramaticaListener {
 	public virtual void ExitInstr_args2([NotNull] GramaticaParser.Instr_args2Context context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="GramaticaParser.exp"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterExp([NotNull] GramaticaParser.ExpContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GramaticaParser.exp"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitExp([NotNull] GramaticaParser.ExpContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GramaticaParser.exp2"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterExp2([NotNull] GramaticaParser.Exp2Context context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GramaticaParser.exp2"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitExp2([NotNull] GramaticaParser.Exp2Context context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="GramaticaParser.directive_args"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

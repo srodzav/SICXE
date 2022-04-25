@@ -45,6 +45,8 @@ instruction:
 	|INSTR2 instr_args2|INSTR1|label '+'INSTR3 instr_args ENDL
 	|label INSTR2 instr_args2|label INSTR2|label INSTR2 label
 	|label INSTR1
+	|label EQU label|EQU label
+	|label EQU exp|EQU exp
 ;
 
 /* Estructura de la directiva*/
@@ -63,6 +65,12 @@ instr_args:
 ;
 instr_args2:
 	REG|REG', 'REG|REG','REG|REG', 'NUM|REG','NUM
+;
+exp:
+	   '('exp')' exp2 | '-'exp exp2 | LABEL exp2 | NUM exp2
+;
+exp2:
+		'+' exp exp2 | '-' exp exp2 | '*' exp exp2 | '/' exp exp2
 ;
 
 /* Estructura del argumento para una directiva: indica si es hexadecimal o cadena*/
@@ -97,6 +105,7 @@ DIRECTIVE:	'BYTE'|'WORD'|'RESB'|'RESW';
 /* Palabra resrvada para start y end */
 START:		'START';
 END:		'END';
+EQU:		'EQU';
 
 /* Define una etiqueta de por lo menos un caracter */
 LABEL:		[A-Z]+[0-9]*|[a-zA-Z]+[0-9]*;

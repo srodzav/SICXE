@@ -44,13 +44,13 @@
             this.paso2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.códigoObjetoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarRegistrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cargadorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simuladorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbErrores = new System.Windows.Forms.TextBox();
             this.dataGridTabSim = new System.Windows.Forms.DataGridView();
-            this.dgSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.intermedio = new System.Windows.Forms.DataGridView();
             this.dg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgEtiqueta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,8 +65,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbRegistros = new System.Windows.Forms.TextBox();
             this.btnEnsamblar = new System.Windows.Forms.Button();
-            this.cargadorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.simuladorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dgSimbolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTabSim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intermedio)).BeginInit();
@@ -192,7 +193,7 @@
             // 
             this.códigoObjetoToolStripMenuItem.Enabled = false;
             this.códigoObjetoToolStripMenuItem.Name = "códigoObjetoToolStripMenuItem";
-            this.códigoObjetoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.códigoObjetoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.códigoObjetoToolStripMenuItem.Text = "Código Objeto";
             this.códigoObjetoToolStripMenuItem.Click += new System.EventHandler(this.códigoObjetoToolStripMenuItem_Click);
             // 
@@ -200,9 +201,23 @@
             // 
             this.generarRegistrosToolStripMenuItem.Enabled = false;
             this.generarRegistrosToolStripMenuItem.Name = "generarRegistrosToolStripMenuItem";
-            this.generarRegistrosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generarRegistrosToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.generarRegistrosToolStripMenuItem.Text = "Generar Registros";
             this.generarRegistrosToolStripMenuItem.Click += new System.EventHandler(this.generarRegistrosToolStripMenuItem_Click);
+            // 
+            // cargadorToolStripMenuItem
+            // 
+            this.cargadorToolStripMenuItem.Enabled = false;
+            this.cargadorToolStripMenuItem.Name = "cargadorToolStripMenuItem";
+            this.cargadorToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.cargadorToolStripMenuItem.Text = "Cargador";
+            // 
+            // simuladorToolStripMenuItem
+            // 
+            this.simuladorToolStripMenuItem.Enabled = false;
+            this.simuladorToolStripMenuItem.Name = "simuladorToolStripMenuItem";
+            this.simuladorToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.simuladorToolStripMenuItem.Text = "Simulador";
             // 
             // label2
             // 
@@ -256,7 +271,8 @@
             this.dataGridTabSim.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridTabSim.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgSimbolo,
-            this.dgDireccion});
+            this.dgDireccion,
+            this.dgTipo});
             this.dataGridTabSim.Location = new System.Drawing.Point(895, 61);
             this.dataGridTabSim.Name = "dataGridTabSim";
             this.dataGridTabSim.ReadOnly = true;
@@ -264,22 +280,6 @@
             this.dataGridTabSim.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridTabSim.Size = new System.Drawing.Size(238, 243);
             this.dataGridTabSim.TabIndex = 6;
-            // 
-            // dgSimbolo
-            // 
-            this.dgSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dgSimbolo.HeaderText = "Simbolo";
-            this.dgSimbolo.Name = "dgSimbolo";
-            this.dgSimbolo.ReadOnly = true;
-            this.dgSimbolo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // dgDireccion
-            // 
-            this.dgDireccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dgDireccion.HeaderText = "Direccion";
-            this.dgDireccion.Name = "dgDireccion";
-            this.dgDireccion.ReadOnly = true;
-            this.dgDireccion.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // intermedio
             // 
@@ -296,7 +296,7 @@
             this.dgOperando,
             this.dgCodObj,
             this.dgErrores});
-            this.intermedio.Location = new System.Drawing.Point(264, 61);
+            this.intermedio.Location = new System.Drawing.Point(268, 61);
             this.intermedio.Name = "intermedio";
             this.intermedio.ReadOnly = true;
             this.intermedio.RowHeadersWidth = 36;
@@ -361,7 +361,7 @@
             // tbPrograma
             // 
             this.tbPrograma.AcceptsTab = true;
-            this.tbPrograma.Location = new System.Drawing.Point(42, 61);
+            this.tbPrograma.Location = new System.Drawing.Point(43, 61);
             this.tbPrograma.Multiline = true;
             this.tbPrograma.Name = "tbPrograma";
             this.tbPrograma.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -434,19 +434,29 @@
             this.btnEnsamblar.UseVisualStyleBackColor = true;
             this.btnEnsamblar.Click += new System.EventHandler(this.btnEnsamblar_Click);
             // 
-            // cargadorToolStripMenuItem
+            // dgSimbolo
             // 
-            this.cargadorToolStripMenuItem.Enabled = false;
-            this.cargadorToolStripMenuItem.Name = "cargadorToolStripMenuItem";
-            this.cargadorToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.cargadorToolStripMenuItem.Text = "Cargador";
+            this.dgSimbolo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgSimbolo.HeaderText = "Simbolo";
+            this.dgSimbolo.Name = "dgSimbolo";
+            this.dgSimbolo.ReadOnly = true;
+            this.dgSimbolo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // simuladorToolStripMenuItem
+            // dgDireccion
             // 
-            this.simuladorToolStripMenuItem.Enabled = false;
-            this.simuladorToolStripMenuItem.Name = "simuladorToolStripMenuItem";
-            this.simuladorToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
-            this.simuladorToolStripMenuItem.Text = "Simulador";
+            this.dgDireccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgDireccion.HeaderText = "Direccion";
+            this.dgDireccion.Name = "dgDireccion";
+            this.dgDireccion.ReadOnly = true;
+            this.dgDireccion.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // dgTipo
+            // 
+            this.dgTipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgTipo.HeaderText = "Tipo";
+            this.dgTipo.Name = "dgTipo";
+            this.dgTipo.ReadOnly = true;
+            this.dgTipo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // Form1
             // 
@@ -490,8 +500,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbErrores;
         private System.Windows.Forms.DataGridView dataGridTabSim;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgSimbolo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgDireccion;
         private System.Windows.Forms.DataGridView intermedio;
         private System.Windows.Forms.TextBox tbPrograma;
         private System.Windows.Forms.TextBox tbLinea;
@@ -518,6 +526,9 @@
         private System.Windows.Forms.Button btnEnsamblar;
         private System.Windows.Forms.ToolStripMenuItem cargadorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem simuladorToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgSimbolo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgDireccion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgTipo;
     }
 }
 

@@ -1,0 +1,13 @@
+CP	Etiqueta	Instrucción	Operando	Codigo Objeto	Errores
+000000	EXPRESIONES	START	0	----	
+000000	TABLA	RESW	000003	----	
+000009	NUM	EQU	19	----	Error: Sintaxis
+000009	ETIQ	CLEAR	X	B410	
+00000B	TAM	EQU	*	----	
+00000B		TIX	NUM	2F6FFF	Error: Simbolo no encontrado
+00000E		LDA	#(ETIQ-TABLA+3)	----	Error: Sintaxis
+00000E	SALTO	JLT	ETIQ	3B2FF8	
+000011		LDT	000004	776FFF	Error: Simbolo no encontrado
+000014	COUNT	WORD	ETIQ-(TAM-TABLA)	----	Error: Sintaxis
+000014		WORD	2*(SALTO-TAM)	00002*(SALTO-TAM)	
+000017		END	SALTO	----	

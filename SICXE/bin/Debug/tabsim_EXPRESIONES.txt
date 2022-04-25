@@ -1,0 +1,6 @@
+Simbolo	Direccion	Tipo
+TABLA	000000	
+ETIQ	000009	
+TAM	00000B	Relativo
+SALTO	00000E	
+Total: 000017 H

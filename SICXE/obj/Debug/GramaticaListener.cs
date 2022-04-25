@@ -153,6 +153,28 @@ public interface IGramaticaListener : IParseTreeListener {
 	void ExitInstr_args2([NotNull] GramaticaParser.Instr_args2Context context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="GramaticaParser.exp"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExp([NotNull] GramaticaParser.ExpContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GramaticaParser.exp"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExp([NotNull] GramaticaParser.ExpContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="GramaticaParser.exp2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExp2([NotNull] GramaticaParser.Exp2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="GramaticaParser.exp2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExp2([NotNull] GramaticaParser.Exp2Context context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="GramaticaParser.directive_args"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

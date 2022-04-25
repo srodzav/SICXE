@@ -32,27 +32,29 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 public partial class GramaticaParser : Parser {
 	public const int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, INSTR1=12, INSTR2=13, INSTR3=14, REG=15, DIRECTIVE=16, 
-		START=17, END=18, LABEL=19, NUM=20, NUM_CHAR=21, EMPTY=22, ENDL=23, WS=24;
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, INSTR1=17, 
+		INSTR2=18, INSTR3=19, REG=20, DIRECTIVE=21, START=22, END=23, EQU=24, 
+		LABEL=25, NUM=26, NUM_CHAR=27, EMPTY=28, ENDL=29, WS=30;
 	public const int
 		RULE_prog = 0, RULE_start = 1, RULE_end = 2, RULE_input = 3, RULE_propositions = 4, 
 		RULE_proposition = 5, RULE_instruction = 6, RULE_directive = 7, RULE_label = 8, 
-		RULE_instr_args = 9, RULE_instr_args2 = 10, RULE_directive_args = 11, 
-		RULE_compileUnit = 12;
+		RULE_instr_args = 9, RULE_instr_args2 = 10, RULE_exp = 11, RULE_exp2 = 12, 
+		RULE_directive_args = 13, RULE_compileUnit = 14;
 	public static readonly string[] ruleNames = {
 		"prog", "start", "end", "input", "propositions", "proposition", "instruction", 
-		"directive", "label", "instr_args", "instr_args2", "directive_args", "compileUnit"
+		"directive", "label", "instr_args", "instr_args2", "exp", "exp2", "directive_args", 
+		"compileUnit"
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, "'+'", "'BASE'", "', X'", "',X'", "', '", "','", "'@'", "'#'", "'X''", 
-		"'''", "'C''", null, null, null, null, null, "'START'", "'END'", null, 
-		null, null, "' '", "'\n'"
+		null, "'+'", "'BASE'", "', X'", "',X'", "', '", "','", "'@'", "'#'", "'('", 
+		"')'", "'-'", "'*'", "'/'", "'X''", "'''", "'C''", null, null, null, null, 
+		null, "'START'", "'END'", "'EQU'", null, null, null, "' '", "'\n'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		"INSTR1", "INSTR2", "INSTR3", "REG", "DIRECTIVE", "START", "END", "LABEL", 
-		"NUM", "NUM_CHAR", "EMPTY", "ENDL", "WS"
+		null, null, null, null, null, "INSTR1", "INSTR2", "INSTR3", "REG", "DIRECTIVE", 
+		"START", "END", "EQU", "LABEL", "NUM", "NUM_CHAR", "EMPTY", "ENDL", "WS"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -139,27 +141,27 @@ public partial class GramaticaParser : Parser {
 		ProgContext _localctx = new ProgContext(_ctx, State);
 		EnterRule(_localctx, 0, RULE_prog);
 		try {
-			State = 29;
+			State = 33;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 26; start();
+				State = 30; start();
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 27; propositions(0);
+				State = 31; propositions(0);
 				}
 				break;
 
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 28; end();
+				State = 32; end();
 				}
 				break;
 			}
@@ -210,23 +212,23 @@ public partial class GramaticaParser : Parser {
 		StartContext _localctx = new StartContext(_ctx, State);
 		EnterRule(_localctx, 2, RULE_start);
 		try {
-			State = 37;
+			State = 41;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,1,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 31; label();
-				State = 32; Match(START);
-				State = 33; Match(NUM);
-				State = 34; Match(ENDL);
+				State = 35; label();
+				State = 36; Match(START);
+				State = 37; Match(NUM);
+				State = 38; Match(ENDL);
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 36; proposition();
+				State = 40; proposition();
 				}
 				break;
 			}
@@ -273,23 +275,23 @@ public partial class GramaticaParser : Parser {
 		EndContext _localctx = new EndContext(_ctx, State);
 		EnterRule(_localctx, 4, RULE_end);
 		try {
-			State = 45;
+			State = 49;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 39; Match(END);
-				State = 40; input();
-				State = 41; Match(ENDL);
+				State = 43; Match(END);
+				State = 44; input();
+				State = 45; Match(ENDL);
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 43; Match(END);
-				State = 44; input();
+				State = 47; Match(END);
+				State = 48; input();
 				}
 				break;
 			}
@@ -335,12 +337,12 @@ public partial class GramaticaParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 48;
+			State = 52;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			if (_la==LABEL) {
 				{
-				State = 47; Match(LABEL);
+				State = 51; Match(LABEL);
 				}
 			}
 
@@ -401,10 +403,10 @@ public partial class GramaticaParser : Parser {
 			EnterOuterAlt(_localctx, 1);
 			{
 			{
-			State = 51; proposition();
+			State = 55; proposition();
 			}
 			_ctx.stop = _input.Lt(-1);
-			State = 57;
+			State = 61;
 			_errHandler.Sync(this);
 			_alt = Interpreter.AdaptivePredict(_input,4,_ctx);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
@@ -415,13 +417,13 @@ public partial class GramaticaParser : Parser {
 					{
 					_localctx = new PropositionsContext(_parentctx, _parentState);
 					PushNewRecursionContext(_localctx, _startState, RULE_propositions);
-					State = 53;
+					State = 57;
 					if (!(Precpred(_ctx, 2))) throw new FailedPredicateException(this, "Precpred(_ctx, 2)");
-					State = 54; proposition();
+					State = 58; proposition();
 					}
 					} 
 				}
-				State = 59;
+				State = 63;
 				_errHandler.Sync(this);
 				_alt = Interpreter.AdaptivePredict(_input,4,_ctx);
 			}
@@ -470,20 +472,20 @@ public partial class GramaticaParser : Parser {
 		PropositionContext _localctx = new PropositionContext(_ctx, State);
 		EnterRule(_localctx, 10, RULE_proposition);
 		try {
-			State = 62;
+			State = 66;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 60; instruction();
+				State = 64; instruction();
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 61; directive();
+				State = 65; directive();
 				}
 				break;
 			}
@@ -516,6 +518,10 @@ public partial class GramaticaParser : Parser {
 			return GetRuleContext<Instr_args2Context>(0);
 		}
 		public ITerminalNode INSTR1() { return GetToken(GramaticaParser.INSTR1, 0); }
+		public ITerminalNode EQU() { return GetToken(GramaticaParser.EQU, 0); }
+		public ExpContext exp() {
+			return GetRuleContext<ExpContext>(0);
+		}
 		public InstructionContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -541,94 +547,128 @@ public partial class GramaticaParser : Parser {
 		InstructionContext _localctx = new InstructionContext(_ctx, State);
 		EnterRule(_localctx, 12, RULE_instruction);
 		try {
-			State = 99;
+			State = 115;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 64; label();
-				State = 65; Match(INSTR3);
-				State = 66; instr_args();
-				State = 67; Match(ENDL);
+				State = 68; label();
+				State = 69; Match(INSTR3);
+				State = 70; instr_args();
+				State = 71; Match(ENDL);
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 69; Match(T__0);
-				State = 70; Match(INSTR3);
-				State = 71; instr_args();
-				State = 72; Match(ENDL);
+				State = 73; Match(T__0);
+				State = 74; Match(INSTR3);
+				State = 75; instr_args();
+				State = 76; Match(ENDL);
 				}
 				break;
 
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 74; Match(INSTR3);
-				State = 75; instr_args();
+				State = 78; Match(INSTR3);
+				State = 79; instr_args();
 				}
 				break;
 
 			case 4:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 76; Match(INSTR2);
-				State = 77; instr_args2();
+				State = 80; Match(INSTR2);
+				State = 81; instr_args2();
 				}
 				break;
 
 			case 5:
 				EnterOuterAlt(_localctx, 5);
 				{
-				State = 78; Match(INSTR1);
+				State = 82; Match(INSTR1);
 				}
 				break;
 
 			case 6:
 				EnterOuterAlt(_localctx, 6);
 				{
-				State = 79; label();
-				State = 80; Match(T__0);
-				State = 81; Match(INSTR3);
-				State = 82; instr_args();
-				State = 83; Match(ENDL);
+				State = 83; label();
+				State = 84; Match(T__0);
+				State = 85; Match(INSTR3);
+				State = 86; instr_args();
+				State = 87; Match(ENDL);
 				}
 				break;
 
 			case 7:
 				EnterOuterAlt(_localctx, 7);
 				{
-				State = 85; label();
-				State = 86; Match(INSTR2);
-				State = 87; instr_args2();
+				State = 89; label();
+				State = 90; Match(INSTR2);
+				State = 91; instr_args2();
 				}
 				break;
 
 			case 8:
 				EnterOuterAlt(_localctx, 8);
 				{
-				State = 89; label();
-				State = 90; Match(INSTR2);
+				State = 93; label();
+				State = 94; Match(INSTR2);
 				}
 				break;
 
 			case 9:
 				EnterOuterAlt(_localctx, 9);
 				{
-				State = 92; label();
-				State = 93; Match(INSTR2);
-				State = 94; label();
+				State = 96; label();
+				State = 97; Match(INSTR2);
+				State = 98; label();
 				}
 				break;
 
 			case 10:
 				EnterOuterAlt(_localctx, 10);
 				{
-				State = 96; label();
-				State = 97; Match(INSTR1);
+				State = 100; label();
+				State = 101; Match(INSTR1);
+				}
+				break;
+
+			case 11:
+				EnterOuterAlt(_localctx, 11);
+				{
+				State = 103; label();
+				State = 104; Match(EQU);
+				State = 105; label();
+				}
+				break;
+
+			case 12:
+				EnterOuterAlt(_localctx, 12);
+				{
+				State = 107; Match(EQU);
+				State = 108; label();
+				}
+				break;
+
+			case 13:
+				EnterOuterAlt(_localctx, 13);
+				{
+				State = 109; label();
+				State = 110; Match(EQU);
+				State = 111; exp();
+				}
+				break;
+
+			case 14:
+				EnterOuterAlt(_localctx, 14);
+				{
+				State = 113; Match(EQU);
+				State = 114; exp();
 				}
 				break;
 			}
@@ -682,34 +722,34 @@ public partial class GramaticaParser : Parser {
 		DirectiveContext _localctx = new DirectiveContext(_ctx, State);
 		EnterRule(_localctx, 14, RULE_directive);
 		try {
-			State = 113;
+			State = 129;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 101; label();
-				State = 102; Match(DIRECTIVE);
-				State = 103; directive_args();
+				State = 117; label();
+				State = 118; Match(DIRECTIVE);
+				State = 119; directive_args();
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 105; Match(T__1);
-				State = 106; Match(LABEL);
-				State = 107; Match(ENDL);
+				State = 121; Match(T__1);
+				State = 122; Match(LABEL);
+				State = 123; Match(ENDL);
 				}
 				break;
 
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 108; label();
-				State = 109; Match(T__1);
-				State = 110; label();
-				State = 111; Match(ENDL);
+				State = 124; label();
+				State = 125; Match(T__1);
+				State = 126; label();
+				State = 127; Match(ENDL);
 				}
 				break;
 			}
@@ -754,12 +794,12 @@ public partial class GramaticaParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 116;
+			State = 132;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,8,_ctx) ) {
 			case 1:
 				{
-				State = 115; Match(LABEL);
+				State = 131; Match(LABEL);
 				}
 				break;
 			}
@@ -804,91 +844,91 @@ public partial class GramaticaParser : Parser {
 		Instr_argsContext _localctx = new Instr_argsContext(_ctx, State);
 		EnterRule(_localctx, 18, RULE_instr_args);
 		try {
-			State = 144;
+			State = 160;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,10,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 118; Match(LABEL);
-				State = 119; Match(T__2);
+				State = 134; Match(LABEL);
+				State = 135; Match(T__2);
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 120; Match(LABEL);
-				State = 121; Match(T__3);
+				State = 136; Match(LABEL);
+				State = 137; Match(T__3);
 				}
 				break;
 
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 122; Match(LABEL);
-				State = 123; Match(T__4);
-				State = 124; Match(NUM);
+				State = 138; Match(LABEL);
+				State = 139; Match(T__4);
+				State = 140; Match(NUM);
 				}
 				break;
 
 			case 4:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 125; Match(LABEL);
-				State = 126; Match(T__5);
-				State = 127; Match(NUM);
+				State = 141; Match(LABEL);
+				State = 142; Match(T__5);
+				State = 143; Match(NUM);
 				}
 				break;
 
 			case 5:
 				EnterOuterAlt(_localctx, 5);
 				{
-				State = 128; Match(T__6);
-				State = 129; Match(LABEL);
+				State = 144; Match(T__6);
+				State = 145; Match(LABEL);
 				}
 				break;
 
 			case 6:
 				EnterOuterAlt(_localctx, 6);
 				{
-				State = 130; Match(T__7);
-				State = 131; Match(LABEL);
+				State = 146; Match(T__7);
+				State = 147; Match(LABEL);
 				}
 				break;
 
 			case 7:
 				EnterOuterAlt(_localctx, 7);
 				{
-				State = 132; Match(NUM);
+				State = 148; Match(NUM);
 				}
 				break;
 
 			case 8:
 				EnterOuterAlt(_localctx, 8);
 				{
-				State = 133; Match(T__6);
-				State = 134; Match(NUM);
+				State = 149; Match(T__6);
+				State = 150; Match(NUM);
 				}
 				break;
 
 			case 9:
 				EnterOuterAlt(_localctx, 9);
 				{
-				State = 135; Match(T__7);
-				State = 136; Match(NUM);
+				State = 151; Match(T__7);
+				State = 152; Match(NUM);
 				}
 				break;
 
 			case 10:
 				EnterOuterAlt(_localctx, 10);
 				{
-				State = 138;
+				State = 154;
 				_errHandler.Sync(this);
 				switch ( Interpreter.AdaptivePredict(_input,9,_ctx) ) {
 				case 1:
 					{
-					State = 137; Match(LABEL);
+					State = 153; Match(LABEL);
 					}
 					break;
 				}
@@ -898,16 +938,16 @@ public partial class GramaticaParser : Parser {
 			case 11:
 				EnterOuterAlt(_localctx, 11);
 				{
-				State = 140; Match(NUM);
-				State = 141; Match(T__3);
+				State = 156; Match(NUM);
+				State = 157; Match(T__3);
 				}
 				break;
 
 			case 12:
 				EnterOuterAlt(_localctx, 12);
 				{
-				State = 142; Match(NUM);
-				State = 143; Match(T__2);
+				State = 158; Match(NUM);
+				State = 159; Match(T__2);
 				}
 				break;
 			}
@@ -954,51 +994,216 @@ public partial class GramaticaParser : Parser {
 		Instr_args2Context _localctx = new Instr_args2Context(_ctx, State);
 		EnterRule(_localctx, 20, RULE_instr_args2);
 		try {
-			State = 159;
+			State = 175;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,11,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 146; Match(REG);
+				State = 162; Match(REG);
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 147; Match(REG);
-				State = 148; Match(T__4);
-				State = 149; Match(REG);
+				State = 163; Match(REG);
+				State = 164; Match(T__4);
+				State = 165; Match(REG);
 				}
 				break;
 
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 150; Match(REG);
-				State = 151; Match(T__5);
-				State = 152; Match(REG);
+				State = 166; Match(REG);
+				State = 167; Match(T__5);
+				State = 168; Match(REG);
 				}
 				break;
 
 			case 4:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 153; Match(REG);
-				State = 154; Match(T__4);
-				State = 155; Match(NUM);
+				State = 169; Match(REG);
+				State = 170; Match(T__4);
+				State = 171; Match(NUM);
 				}
 				break;
 
 			case 5:
 				EnterOuterAlt(_localctx, 5);
 				{
-				State = 156; Match(REG);
-				State = 157; Match(T__5);
-				State = 158; Match(NUM);
+				State = 172; Match(REG);
+				State = 173; Match(T__5);
+				State = 174; Match(NUM);
 				}
 				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ExpContext : ParserRuleContext {
+		public ExpContext exp() {
+			return GetRuleContext<ExpContext>(0);
+		}
+		public Exp2Context exp2() {
+			return GetRuleContext<Exp2Context>(0);
+		}
+		public ITerminalNode LABEL() { return GetToken(GramaticaParser.LABEL, 0); }
+		public ITerminalNode NUM() { return GetToken(GramaticaParser.NUM, 0); }
+		public ExpContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_exp; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IGramaticaListener typedListener = listener as IGramaticaListener;
+			if (typedListener != null) typedListener.EnterExp(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IGramaticaListener typedListener = listener as IGramaticaListener;
+			if (typedListener != null) typedListener.ExitExp(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IGramaticaVisitor<TResult> typedVisitor = visitor as IGramaticaVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExp(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ExpContext exp() {
+		ExpContext _localctx = new ExpContext(_ctx, State);
+		EnterRule(_localctx, 22, RULE_exp);
+		try {
+			State = 190;
+			_errHandler.Sync(this);
+			switch (_input.La(1)) {
+			case T__8:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 177; Match(T__8);
+				State = 178; exp();
+				State = 179; Match(T__9);
+				State = 180; exp2();
+				}
+				break;
+			case T__10:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 182; Match(T__10);
+				State = 183; exp();
+				State = 184; exp2();
+				}
+				break;
+			case LABEL:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 186; Match(LABEL);
+				State = 187; exp2();
+				}
+				break;
+			case NUM:
+				EnterOuterAlt(_localctx, 4);
+				{
+				State = 188; Match(NUM);
+				State = 189; exp2();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class Exp2Context : ParserRuleContext {
+		public ExpContext exp() {
+			return GetRuleContext<ExpContext>(0);
+		}
+		public Exp2Context exp2() {
+			return GetRuleContext<Exp2Context>(0);
+		}
+		public Exp2Context(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_exp2; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IGramaticaListener typedListener = listener as IGramaticaListener;
+			if (typedListener != null) typedListener.EnterExp2(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IGramaticaListener typedListener = listener as IGramaticaListener;
+			if (typedListener != null) typedListener.ExitExp2(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IGramaticaVisitor<TResult> typedVisitor = visitor as IGramaticaVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExp2(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public Exp2Context exp2() {
+		Exp2Context _localctx = new Exp2Context(_ctx, State);
+		EnterRule(_localctx, 24, RULE_exp2);
+		try {
+			State = 208;
+			_errHandler.Sync(this);
+			switch (_input.La(1)) {
+			case T__0:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 192; Match(T__0);
+				State = 193; exp();
+				State = 194; exp2();
+				}
+				break;
+			case T__10:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 196; Match(T__10);
+				State = 197; exp();
+				State = 198; exp2();
+				}
+				break;
+			case T__11:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 200; Match(T__11);
+				State = 201; exp();
+				State = 202; exp2();
+				}
+				break;
+			case T__12:
+				EnterOuterAlt(_localctx, 4);
+				{
+				State = 204; Match(T__12);
+				State = 205; exp();
+				State = 206; exp2();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1038,31 +1243,31 @@ public partial class GramaticaParser : Parser {
 	[RuleVersion(0)]
 	public Directive_argsContext directive_args() {
 		Directive_argsContext _localctx = new Directive_argsContext(_ctx, State);
-		EnterRule(_localctx, 22, RULE_directive_args);
+		EnterRule(_localctx, 26, RULE_directive_args);
 		try {
-			State = 168;
+			State = 217;
 			_errHandler.Sync(this);
 			switch (_input.La(1)) {
 			case NUM:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 161; Match(NUM);
+				State = 210; Match(NUM);
 				}
 				break;
-			case T__8:
+			case T__13:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 162; Match(T__8);
-				State = 163; Match(NUM);
-				State = 164; Match(T__9);
+				State = 211; Match(T__13);
+				State = 212; Match(NUM);
+				State = 213; Match(T__14);
 				}
 				break;
-			case T__10:
+			case T__15:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 165; Match(T__10);
-				State = 166; Match(LABEL);
-				State = 167; Match(T__9);
+				State = 214; Match(T__15);
+				State = 215; Match(LABEL);
+				State = 216; Match(T__14);
 				}
 				break;
 			default:
@@ -1105,11 +1310,11 @@ public partial class GramaticaParser : Parser {
 	[RuleVersion(0)]
 	public CompileUnitContext compileUnit() {
 		CompileUnitContext _localctx = new CompileUnitContext(_ctx, State);
-		EnterRule(_localctx, 24, RULE_compileUnit);
+		EnterRule(_localctx, 28, RULE_compileUnit);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 170; Match(Eof);
+			State = 219; Match(Eof);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1137,71 +1342,91 @@ public partial class GramaticaParser : Parser {
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\x1A\xAF\x4\x2\t"+
-		"\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t"+
-		"\t\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x3\x2\x3\x2\x3\x2"+
-		"\x5\x2 \n\x2\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x5\x3(\n\x3\x3\x4\x3"+
-		"\x4\x3\x4\x3\x4\x3\x4\x3\x4\x5\x4\x30\n\x4\x3\x5\x5\x5\x33\n\x5\x3\x6"+
-		"\x3\x6\x3\x6\x3\x6\x3\x6\a\x6:\n\x6\f\x6\xE\x6=\v\x6\x3\a\x3\a\x5\a\x41"+
-		"\n\a\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b"+
-		"\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b"+
-		"\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\b\x66\n\b\x3\t\x3\t\x3\t\x3"+
-		"\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x5\tt\n\t\x3\n\x5\nw\n\n\x3"+
-		"\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3"+
-		"\v\x3\v\x3\v\x3\v\x3\v\x3\v\x5\v\x8D\n\v\x3\v\x3\v\x3\v\x3\v\x5\v\x93"+
-		"\n\v\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f"+
-		"\x5\f\xA2\n\f\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r\x5\r\xAB\n\r\x3\xE\x3"+
-		"\xE\x3\xE\x2\x2\x3\n\xF\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2\x10\x2"+
-		"\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x2\x2\xC6\x2\x1F\x3\x2\x2\x2\x4\'"+
-		"\x3\x2\x2\x2\x6/\x3\x2\x2\x2\b\x32\x3\x2\x2\x2\n\x34\x3\x2\x2\x2\f@\x3"+
-		"\x2\x2\x2\xE\x65\x3\x2\x2\x2\x10s\x3\x2\x2\x2\x12v\x3\x2\x2\x2\x14\x92"+
-		"\x3\x2\x2\x2\x16\xA1\x3\x2\x2\x2\x18\xAA\x3\x2\x2\x2\x1A\xAC\x3\x2\x2"+
-		"\x2\x1C \x5\x4\x3\x2\x1D \x5\n\x6\x2\x1E \x5\x6\x4\x2\x1F\x1C\x3\x2\x2"+
-		"\x2\x1F\x1D\x3\x2\x2\x2\x1F\x1E\x3\x2\x2\x2 \x3\x3\x2\x2\x2!\"\x5\x12"+
-		"\n\x2\"#\a\x13\x2\x2#$\a\x16\x2\x2$%\a\x19\x2\x2%(\x3\x2\x2\x2&(\x5\f"+
-		"\a\x2\'!\x3\x2\x2\x2\'&\x3\x2\x2\x2(\x5\x3\x2\x2\x2)*\a\x14\x2\x2*+\x5"+
-		"\b\x5\x2+,\a\x19\x2\x2,\x30\x3\x2\x2\x2-.\a\x14\x2\x2.\x30\x5\b\x5\x2"+
-		"/)\x3\x2\x2\x2/-\x3\x2\x2\x2\x30\a\x3\x2\x2\x2\x31\x33\a\x15\x2\x2\x32"+
-		"\x31\x3\x2\x2\x2\x32\x33\x3\x2\x2\x2\x33\t\x3\x2\x2\x2\x34\x35\b\x6\x1"+
-		"\x2\x35\x36\x5\f\a\x2\x36;\x3\x2\x2\x2\x37\x38\f\x4\x2\x2\x38:\x5\f\a"+
-		"\x2\x39\x37\x3\x2\x2\x2:=\x3\x2\x2\x2;\x39\x3\x2\x2\x2;<\x3\x2\x2\x2<"+
-		"\v\x3\x2\x2\x2=;\x3\x2\x2\x2>\x41\x5\xE\b\x2?\x41\x5\x10\t\x2@>\x3\x2"+
-		"\x2\x2@?\x3\x2\x2\x2\x41\r\x3\x2\x2\x2\x42\x43\x5\x12\n\x2\x43\x44\a\x10"+
-		"\x2\x2\x44\x45\x5\x14\v\x2\x45\x46\a\x19\x2\x2\x46\x66\x3\x2\x2\x2GH\a"+
-		"\x3\x2\x2HI\a\x10\x2\x2IJ\x5\x14\v\x2JK\a\x19\x2\x2K\x66\x3\x2\x2\x2L"+
-		"M\a\x10\x2\x2M\x66\x5\x14\v\x2NO\a\xF\x2\x2O\x66\x5\x16\f\x2P\x66\a\xE"+
-		"\x2\x2QR\x5\x12\n\x2RS\a\x3\x2\x2ST\a\x10\x2\x2TU\x5\x14\v\x2UV\a\x19"+
-		"\x2\x2V\x66\x3\x2\x2\x2WX\x5\x12\n\x2XY\a\xF\x2\x2YZ\x5\x16\f\x2Z\x66"+
-		"\x3\x2\x2\x2[\\\x5\x12\n\x2\\]\a\xF\x2\x2]\x66\x3\x2\x2\x2^_\x5\x12\n"+
-		"\x2_`\a\xF\x2\x2`\x61\x5\x12\n\x2\x61\x66\x3\x2\x2\x2\x62\x63\x5\x12\n"+
-		"\x2\x63\x64\a\xE\x2\x2\x64\x66\x3\x2\x2\x2\x65\x42\x3\x2\x2\x2\x65G\x3"+
-		"\x2\x2\x2\x65L\x3\x2\x2\x2\x65N\x3\x2\x2\x2\x65P\x3\x2\x2\x2\x65Q\x3\x2"+
-		"\x2\x2\x65W\x3\x2\x2\x2\x65[\x3\x2\x2\x2\x65^\x3\x2\x2\x2\x65\x62\x3\x2"+
-		"\x2\x2\x66\xF\x3\x2\x2\x2gh\x5\x12\n\x2hi\a\x12\x2\x2ij\x5\x18\r\x2jt"+
-		"\x3\x2\x2\x2kl\a\x4\x2\x2lm\a\x15\x2\x2mt\a\x19\x2\x2no\x5\x12\n\x2op"+
-		"\a\x4\x2\x2pq\x5\x12\n\x2qr\a\x19\x2\x2rt\x3\x2\x2\x2sg\x3\x2\x2\x2sk"+
-		"\x3\x2\x2\x2sn\x3\x2\x2\x2t\x11\x3\x2\x2\x2uw\a\x15\x2\x2vu\x3\x2\x2\x2"+
-		"vw\x3\x2\x2\x2w\x13\x3\x2\x2\x2xy\a\x15\x2\x2y\x93\a\x5\x2\x2z{\a\x15"+
-		"\x2\x2{\x93\a\x6\x2\x2|}\a\x15\x2\x2}~\a\a\x2\x2~\x93\a\x16\x2\x2\x7F"+
-		"\x80\a\x15\x2\x2\x80\x81\a\b\x2\x2\x81\x93\a\x16\x2\x2\x82\x83\a\t\x2"+
-		"\x2\x83\x93\a\x15\x2\x2\x84\x85\a\n\x2\x2\x85\x93\a\x15\x2\x2\x86\x93"+
-		"\a\x16\x2\x2\x87\x88\a\t\x2\x2\x88\x93\a\x16\x2\x2\x89\x8A\a\n\x2\x2\x8A"+
-		"\x93\a\x16\x2\x2\x8B\x8D\a\x15\x2\x2\x8C\x8B\x3\x2\x2\x2\x8C\x8D\x3\x2"+
-		"\x2\x2\x8D\x93\x3\x2\x2\x2\x8E\x8F\a\x16\x2\x2\x8F\x93\a\x6\x2\x2\x90"+
-		"\x91\a\x16\x2\x2\x91\x93\a\x5\x2\x2\x92x\x3\x2\x2\x2\x92z\x3\x2\x2\x2"+
-		"\x92|\x3\x2\x2\x2\x92\x7F\x3\x2\x2\x2\x92\x82\x3\x2\x2\x2\x92\x84\x3\x2"+
-		"\x2\x2\x92\x86\x3\x2\x2\x2\x92\x87\x3\x2\x2\x2\x92\x89\x3\x2\x2\x2\x92"+
-		"\x8C\x3\x2\x2\x2\x92\x8E\x3\x2\x2\x2\x92\x90\x3\x2\x2\x2\x93\x15\x3\x2"+
-		"\x2\x2\x94\xA2\a\x11\x2\x2\x95\x96\a\x11\x2\x2\x96\x97\a\a\x2\x2\x97\xA2"+
-		"\a\x11\x2\x2\x98\x99\a\x11\x2\x2\x99\x9A\a\b\x2\x2\x9A\xA2\a\x11\x2\x2"+
-		"\x9B\x9C\a\x11\x2\x2\x9C\x9D\a\a\x2\x2\x9D\xA2\a\x16\x2\x2\x9E\x9F\a\x11"+
-		"\x2\x2\x9F\xA0\a\b\x2\x2\xA0\xA2\a\x16\x2\x2\xA1\x94\x3\x2\x2\x2\xA1\x95"+
-		"\x3\x2\x2\x2\xA1\x98\x3\x2\x2\x2\xA1\x9B\x3\x2\x2\x2\xA1\x9E\x3\x2\x2"+
-		"\x2\xA2\x17\x3\x2\x2\x2\xA3\xAB\a\x16\x2\x2\xA4\xA5\a\v\x2\x2\xA5\xA6"+
-		"\a\x16\x2\x2\xA6\xAB\a\f\x2\x2\xA7\xA8\a\r\x2\x2\xA8\xA9\a\x15\x2\x2\xA9"+
-		"\xAB\a\f\x2\x2\xAA\xA3\x3\x2\x2\x2\xAA\xA4\x3\x2\x2\x2\xAA\xA7\x3\x2\x2"+
-		"\x2\xAB\x19\x3\x2\x2\x2\xAC\xAD\a\x2\x2\x3\xAD\x1B\x3\x2\x2\x2\xF\x1F"+
-		"\'/\x32;@\x65sv\x8C\x92\xA1\xAA";
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3 \xE0\x4\x2\t\x2"+
+		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
+		"\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x4\xF\t\xF\x4\x10\t"+
+		"\x10\x3\x2\x3\x2\x3\x2\x5\x2$\n\x2\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3"+
+		"\x5\x3,\n\x3\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x5\x4\x34\n\x4\x3\x5"+
+		"\x5\x5\x37\n\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\a\x6>\n\x6\f\x6\xE\x6\x41"+
+		"\v\x6\x3\a\x3\a\x5\a\x45\n\a\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3"+
+		"\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3"+
+		"\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3"+
+		"\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\bv\n\b\x3\t\x3"+
+		"\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x5\t\x84\n\t\x3\n"+
+		"\x5\n\x87\n\n\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3"+
+		"\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x3\v\x5\v\x9D\n\v\x3\v\x3\v\x3\v"+
+		"\x3\v\x5\v\xA3\n\v\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x3"+
+		"\f\x3\f\x3\f\x5\f\xB2\n\f\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r"+
+		"\x3\r\x3\r\x3\r\x3\r\x5\r\xC1\n\r\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE"+
+		"\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x5\xE\xD3"+
+		"\n\xE\x3\xF\x3\xF\x3\xF\x3\xF\x3\xF\x3\xF\x3\xF\x5\xF\xDC\n\xF\x3\x10"+
+		"\x3\x10\x3\x10\x2\x2\x3\n\x11\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2\x10"+
+		"\x2\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2\x2\x2\xFF\x2#\x3"+
+		"\x2\x2\x2\x4+\x3\x2\x2\x2\x6\x33\x3\x2\x2\x2\b\x36\x3\x2\x2\x2\n\x38\x3"+
+		"\x2\x2\x2\f\x44\x3\x2\x2\x2\xEu\x3\x2\x2\x2\x10\x83\x3\x2\x2\x2\x12\x86"+
+		"\x3\x2\x2\x2\x14\xA2\x3\x2\x2\x2\x16\xB1\x3\x2\x2\x2\x18\xC0\x3\x2\x2"+
+		"\x2\x1A\xD2\x3\x2\x2\x2\x1C\xDB\x3\x2\x2\x2\x1E\xDD\x3\x2\x2\x2 $\x5\x4"+
+		"\x3\x2!$\x5\n\x6\x2\"$\x5\x6\x4\x2# \x3\x2\x2\x2#!\x3\x2\x2\x2#\"\x3\x2"+
+		"\x2\x2$\x3\x3\x2\x2\x2%&\x5\x12\n\x2&\'\a\x18\x2\x2\'(\a\x1C\x2\x2()\a"+
+		"\x1F\x2\x2),\x3\x2\x2\x2*,\x5\f\a\x2+%\x3\x2\x2\x2+*\x3\x2\x2\x2,\x5\x3"+
+		"\x2\x2\x2-.\a\x19\x2\x2./\x5\b\x5\x2/\x30\a\x1F\x2\x2\x30\x34\x3\x2\x2"+
+		"\x2\x31\x32\a\x19\x2\x2\x32\x34\x5\b\x5\x2\x33-\x3\x2\x2\x2\x33\x31\x3"+
+		"\x2\x2\x2\x34\a\x3\x2\x2\x2\x35\x37\a\x1B\x2\x2\x36\x35\x3\x2\x2\x2\x36"+
+		"\x37\x3\x2\x2\x2\x37\t\x3\x2\x2\x2\x38\x39\b\x6\x1\x2\x39:\x5\f\a\x2:"+
+		"?\x3\x2\x2\x2;<\f\x4\x2\x2<>\x5\f\a\x2=;\x3\x2\x2\x2>\x41\x3\x2\x2\x2"+
+		"?=\x3\x2\x2\x2?@\x3\x2\x2\x2@\v\x3\x2\x2\x2\x41?\x3\x2\x2\x2\x42\x45\x5"+
+		"\xE\b\x2\x43\x45\x5\x10\t\x2\x44\x42\x3\x2\x2\x2\x44\x43\x3\x2\x2\x2\x45"+
+		"\r\x3\x2\x2\x2\x46G\x5\x12\n\x2GH\a\x15\x2\x2HI\x5\x14\v\x2IJ\a\x1F\x2"+
+		"\x2Jv\x3\x2\x2\x2KL\a\x3\x2\x2LM\a\x15\x2\x2MN\x5\x14\v\x2NO\a\x1F\x2"+
+		"\x2Ov\x3\x2\x2\x2PQ\a\x15\x2\x2Qv\x5\x14\v\x2RS\a\x14\x2\x2Sv\x5\x16\f"+
+		"\x2Tv\a\x13\x2\x2UV\x5\x12\n\x2VW\a\x3\x2\x2WX\a\x15\x2\x2XY\x5\x14\v"+
+		"\x2YZ\a\x1F\x2\x2Zv\x3\x2\x2\x2[\\\x5\x12\n\x2\\]\a\x14\x2\x2]^\x5\x16"+
+		"\f\x2^v\x3\x2\x2\x2_`\x5\x12\n\x2`\x61\a\x14\x2\x2\x61v\x3\x2\x2\x2\x62"+
+		"\x63\x5\x12\n\x2\x63\x64\a\x14\x2\x2\x64\x65\x5\x12\n\x2\x65v\x3\x2\x2"+
+		"\x2\x66g\x5\x12\n\x2gh\a\x13\x2\x2hv\x3\x2\x2\x2ij\x5\x12\n\x2jk\a\x1A"+
+		"\x2\x2kl\x5\x12\n\x2lv\x3\x2\x2\x2mn\a\x1A\x2\x2nv\x5\x12\n\x2op\x5\x12"+
+		"\n\x2pq\a\x1A\x2\x2qr\x5\x18\r\x2rv\x3\x2\x2\x2st\a\x1A\x2\x2tv\x5\x18"+
+		"\r\x2u\x46\x3\x2\x2\x2uK\x3\x2\x2\x2uP\x3\x2\x2\x2uR\x3\x2\x2\x2uT\x3"+
+		"\x2\x2\x2uU\x3\x2\x2\x2u[\x3\x2\x2\x2u_\x3\x2\x2\x2u\x62\x3\x2\x2\x2u"+
+		"\x66\x3\x2\x2\x2ui\x3\x2\x2\x2um\x3\x2\x2\x2uo\x3\x2\x2\x2us\x3\x2\x2"+
+		"\x2v\xF\x3\x2\x2\x2wx\x5\x12\n\x2xy\a\x17\x2\x2yz\x5\x1C\xF\x2z\x84\x3"+
+		"\x2\x2\x2{|\a\x4\x2\x2|}\a\x1B\x2\x2}\x84\a\x1F\x2\x2~\x7F\x5\x12\n\x2"+
+		"\x7F\x80\a\x4\x2\x2\x80\x81\x5\x12\n\x2\x81\x82\a\x1F\x2\x2\x82\x84\x3"+
+		"\x2\x2\x2\x83w\x3\x2\x2\x2\x83{\x3\x2\x2\x2\x83~\x3\x2\x2\x2\x84\x11\x3"+
+		"\x2\x2\x2\x85\x87\a\x1B\x2\x2\x86\x85\x3\x2\x2\x2\x86\x87\x3\x2\x2\x2"+
+		"\x87\x13\x3\x2\x2\x2\x88\x89\a\x1B\x2\x2\x89\xA3\a\x5\x2\x2\x8A\x8B\a"+
+		"\x1B\x2\x2\x8B\xA3\a\x6\x2\x2\x8C\x8D\a\x1B\x2\x2\x8D\x8E\a\a\x2\x2\x8E"+
+		"\xA3\a\x1C\x2\x2\x8F\x90\a\x1B\x2\x2\x90\x91\a\b\x2\x2\x91\xA3\a\x1C\x2"+
+		"\x2\x92\x93\a\t\x2\x2\x93\xA3\a\x1B\x2\x2\x94\x95\a\n\x2\x2\x95\xA3\a"+
+		"\x1B\x2\x2\x96\xA3\a\x1C\x2\x2\x97\x98\a\t\x2\x2\x98\xA3\a\x1C\x2\x2\x99"+
+		"\x9A\a\n\x2\x2\x9A\xA3\a\x1C\x2\x2\x9B\x9D\a\x1B\x2\x2\x9C\x9B\x3\x2\x2"+
+		"\x2\x9C\x9D\x3\x2\x2\x2\x9D\xA3\x3\x2\x2\x2\x9E\x9F\a\x1C\x2\x2\x9F\xA3"+
+		"\a\x6\x2\x2\xA0\xA1\a\x1C\x2\x2\xA1\xA3\a\x5\x2\x2\xA2\x88\x3\x2\x2\x2"+
+		"\xA2\x8A\x3\x2\x2\x2\xA2\x8C\x3\x2\x2\x2\xA2\x8F\x3\x2\x2\x2\xA2\x92\x3"+
+		"\x2\x2\x2\xA2\x94\x3\x2\x2\x2\xA2\x96\x3\x2\x2\x2\xA2\x97\x3\x2\x2\x2"+
+		"\xA2\x99\x3\x2\x2\x2\xA2\x9C\x3\x2\x2\x2\xA2\x9E\x3\x2\x2\x2\xA2\xA0\x3"+
+		"\x2\x2\x2\xA3\x15\x3\x2\x2\x2\xA4\xB2\a\x16\x2\x2\xA5\xA6\a\x16\x2\x2"+
+		"\xA6\xA7\a\a\x2\x2\xA7\xB2\a\x16\x2\x2\xA8\xA9\a\x16\x2\x2\xA9\xAA\a\b"+
+		"\x2\x2\xAA\xB2\a\x16\x2\x2\xAB\xAC\a\x16\x2\x2\xAC\xAD\a\a\x2\x2\xAD\xB2"+
+		"\a\x1C\x2\x2\xAE\xAF\a\x16\x2\x2\xAF\xB0\a\b\x2\x2\xB0\xB2\a\x1C\x2\x2"+
+		"\xB1\xA4\x3\x2\x2\x2\xB1\xA5\x3\x2\x2\x2\xB1\xA8\x3\x2\x2\x2\xB1\xAB\x3"+
+		"\x2\x2\x2\xB1\xAE\x3\x2\x2\x2\xB2\x17\x3\x2\x2\x2\xB3\xB4\a\v\x2\x2\xB4"+
+		"\xB5\x5\x18\r\x2\xB5\xB6\a\f\x2\x2\xB6\xB7\x5\x1A\xE\x2\xB7\xC1\x3\x2"+
+		"\x2\x2\xB8\xB9\a\r\x2\x2\xB9\xBA\x5\x18\r\x2\xBA\xBB\x5\x1A\xE\x2\xBB"+
+		"\xC1\x3\x2\x2\x2\xBC\xBD\a\x1B\x2\x2\xBD\xC1\x5\x1A\xE\x2\xBE\xBF\a\x1C"+
+		"\x2\x2\xBF\xC1\x5\x1A\xE\x2\xC0\xB3\x3\x2\x2\x2\xC0\xB8\x3\x2\x2\x2\xC0"+
+		"\xBC\x3\x2\x2\x2\xC0\xBE\x3\x2\x2\x2\xC1\x19\x3\x2\x2\x2\xC2\xC3\a\x3"+
+		"\x2\x2\xC3\xC4\x5\x18\r\x2\xC4\xC5\x5\x1A\xE\x2\xC5\xD3\x3\x2\x2\x2\xC6"+
+		"\xC7\a\r\x2\x2\xC7\xC8\x5\x18\r\x2\xC8\xC9\x5\x1A\xE\x2\xC9\xD3\x3\x2"+
+		"\x2\x2\xCA\xCB\a\xE\x2\x2\xCB\xCC\x5\x18\r\x2\xCC\xCD\x5\x1A\xE\x2\xCD"+
+		"\xD3\x3\x2\x2\x2\xCE\xCF\a\xF\x2\x2\xCF\xD0\x5\x18\r\x2\xD0\xD1\x5\x1A"+
+		"\xE\x2\xD1\xD3\x3\x2\x2\x2\xD2\xC2\x3\x2\x2\x2\xD2\xC6\x3\x2\x2\x2\xD2"+
+		"\xCA\x3\x2\x2\x2\xD2\xCE\x3\x2\x2\x2\xD3\x1B\x3\x2\x2\x2\xD4\xDC\a\x1C"+
+		"\x2\x2\xD5\xD6\a\x10\x2\x2\xD6\xD7\a\x1C\x2\x2\xD7\xDC\a\x11\x2\x2\xD8"+
+		"\xD9\a\x12\x2\x2\xD9\xDA\a\x1B\x2\x2\xDA\xDC\a\x11\x2\x2\xDB\xD4\x3\x2"+
+		"\x2\x2\xDB\xD5\x3\x2\x2\x2\xDB\xD8\x3\x2\x2\x2\xDC\x1D\x3\x2\x2\x2\xDD"+
+		"\xDE\a\x2\x2\x3\xDE\x1F\x3\x2\x2\x2\x11#+\x33\x36?\x44u\x83\x86\x9C\xA2"+
+		"\xB1\xC0\xD2\xDB";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }
