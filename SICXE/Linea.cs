@@ -64,7 +64,7 @@ namespace SICXE {
             lin = Regex.Replace(lin, @"\s+", " ");
             string[] valores = lin.Split(' ');
 
-            MessageBox.Show(valores[1]);
+            //MessageBox.Show(valores[1]);
 
             if (Instr3.Contains(valores[1]))
             {

@@ -41,10 +41,13 @@ proposition:
 /* Estructura de una instrucción. En los argumentos puede
 	llevar una etiqueta direccionada o indexada */
 instruction:
-	label INSTR3 instr_args ENDL|'+'INSTR3 instr_args ENDL|INSTR3 instr_args
-	|INSTR2 instr_args2|INSTR1|label '+'INSTR3 instr_args ENDL
-	|label INSTR2 instr_args2|label INSTR2|label INSTR2 label
-	|label INSTR1
+	label INSTR3 instr_args ENDL|INSTR3 instr_args
+	|label INSTR3 exp ENDL|INSTR3 exp
+	|label '+'INSTR3 instr_args ENDL|'+'INSTR3 instr_args ENDL
+	|label INSTR2|label INSTR2 label
+	|label INSTR2 instr_args2|INSTR2 instr_args2
+	|label INSTR1|INSTR1
+	|label EQU instr_args|EQU instr_args
 	|label EQU label|EQU label
 	|label EQU exp|EQU exp
 ;
@@ -52,6 +55,7 @@ instruction:
 /* Estructura de la directiva*/
 directive:
 	label DIRECTIVE directive_args|'BASE' LABEL ENDL|label 'BASE'  label ENDL
+	|label DIRECTIVE exp ENDL|DIRECTIVE exp ENDL
 ;
 
 /*Define si existe o no la etiqueta para una instruccion*/
