@@ -340,18 +340,22 @@ namespace SICXE
                     if (Instr4.Contains(prog.lineas[i].CodigoOp) && !Instr4.Contains(prog.lineas[i].Etiqueta))
                     {
                         contador += 4;
+                        prog.lineas[i].Tipo = "Relativo";
                     }
                     else if (Instr3.Contains(prog.lineas[i].CodigoOp) && !Instr3.Contains(prog.lineas[i].Etiqueta))
                     {
                         contador += 3;
+                        prog.lineas[i].Tipo = "Relativo";
                     }
                     else if (Instr2.Contains(prog.lineas[i].CodigoOp) && !Instr2.Contains(prog.lineas[i].Etiqueta))
                     {
                         contador += 2;
+                        prog.lineas[i].Tipo = "Relativo";
                     }
                     else if (Instr1.Contains(prog.lineas[i].CodigoOp) && !Instr1.Contains(prog.lineas[i].Etiqueta))
                     {
                         contador += 1;
+                        prog.lineas[i].Tipo = "Relativo";
                     }
                     else if (Directivas.Contains(prog.lineas[i].CodigoOp))
                     { // Si es una directiva evalua individualmente
@@ -360,23 +364,28 @@ namespace SICXE
                             if (prog.lineas[i].Operando.Contains("X"))
                             { // Si es X, divide el total y lo redondea hacia arriba
                                 contador += (int)Math.Ceiling(((double)prog.lineas[i].Operando.Length-3) / 2);
+                                prog.lineas[i].Tipo = "Relativo";
                             }
                             else if (prog.lineas[i].Operando.Contains("C"))
                             { // Si es C, agrega el total de bytes
                                 contador += (prog.lineas[i].Operando.Length - 3);
+                                prog.lineas[i].Tipo = "Relativo";
                             }
                         }
                         else if (prog.lineas[i].CodigoOp == "WORD")
                         { // Si es WORD solo agrega 3 al contador
                             contador += 3;
+                            prog.lineas[i].Tipo = "Relativo";
                         }
                         else if (prog.lineas[i].CodigoOp == "RESB")
                         { // Si es RESB convierte a Hexadecimal y lo agrega
                             contador += prog.lineas[i].Operando.ToDec();
+                            prog.lineas[i].Tipo = "Relativo";
                         }
                         else if (prog.lineas[i].CodigoOp == "RESW")
                         { // Si es RESW multiplica por 3 y convierte a Hexadecimal para agregarlo
                             contador += prog.lineas[i].Operando.ToDec() * 3;
+                            prog.lineas[i].Tipo = "Relativo";
                         }
                         else if (prog.lineas[i].CodigoOp == "EQU")
                         { // Si es EQU, evalua todo

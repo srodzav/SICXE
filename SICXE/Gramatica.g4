@@ -66,6 +66,7 @@ label:
 /* Estructura de una etiqueta, que puede ser direccionada o indexada, o no tenerla */
 instr_args:
 	LABEL', X'|LABEL',X'|LABEL', 'NUM|LABEL','NUM|'@'LABEL|'#'LABEL|NUM|'@'NUM|'#'NUM|LABEL?|NUM',X'|NUM', X'
+	|'@'exp|'#'exp|exp
 ;
 instr_args2:
 	REG|REG', 'REG|REG','REG|REG', 'NUM|REG','NUM
@@ -74,7 +75,7 @@ exp:
 	   '('exp')' exp2 | '-'exp exp2 | LABEL exp2 | NUM exp2
 ;
 exp2:
-		'+' exp exp2 | '-' exp exp2 | '*' exp exp2 | '/' exp exp2
+		'+' exp exp2 | '-' exp exp2 | '*' exp exp2 | '/' exp exp2 | LABEL? | NUM?
 ;
 
 /* Estructura del argumento para una directiva: indica si es hexadecimal o cadena*/

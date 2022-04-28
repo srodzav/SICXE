@@ -1,6 +1,8 @@
 Simbolo	Direccion	Tipo
-TABLA	000000	
-ETIQ	000009	
+TABLA	000000	Relativo
+NUM	000009	Absoluto
+ETIQ	000009	Relativo
 TAM	00000B	Relativo
-SALTO	00000E	
-Total: 000017 H
+SALTO	000011	Relativo
+COUNT	000017	Relativo
+Total: 00001D H
