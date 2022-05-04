@@ -412,7 +412,14 @@ namespace SICXE
                         }
                         if(BandRep == false)
                         {
-                            dataGridTabSim.Rows.Add(prog.lineas[i].Etiqueta, CP, prog.lineas[i].Tipo);
+                            if (prog.lineas[i].CodigoOp == "EQU" && prog.lineas[i].Operando != "*")
+                            {
+                                dataGridTabSim.Rows.Add(prog.lineas[i].Etiqueta, Convert.ToInt32(prog.lineas[i].Operando).ToHex(), prog.lineas[i].Tipo);
+                            }
+                            else
+                            {
+                                dataGridTabSim.Rows.Add(prog.lineas[i].Etiqueta, CP, prog.lineas[i].Tipo);
+                            }
                         }
                         else
                         {
@@ -421,7 +428,7 @@ namespace SICXE
                     }
                     else
                     {
-                        if(prog.lineas[i].Etiqueta != null && prog.lineas[i].Etiqueta != "" && prog.lineas[i].Etiqueta != " " && i != 0 && !Instr4.Contains(prog.lineas[i].Etiqueta) && (Instr3.Contains(prog.lineas[i].Etiqueta) || Instr1.Contains(prog.lineas[i].Etiqueta)))
+                        if(prog.lineas[i].Etiqueta != null && prog.lineas[i].Etiqueta != "" && prog.lineas[i].Etiqueta != " " && i != 0 && (!Instr4.Contains(prog.lineas[i].Etiqueta) || Instr3.Contains(prog.lineas[i].Etiqueta) || Instr2.Contains(prog.lineas[i].Etiqueta) || Instr1.Contains(prog.lineas[i].Etiqueta)))
                         {
                             intermedio.Rows[i].Cells[5].Value = "Error: Sintaxis";
                         }
@@ -448,10 +455,21 @@ namespace SICXE
                 }
             }
 
-            #region ARCHIVOS
+            /*For para hacer operaciones
+            for (int i = 0; i < prog.lineas.Count; i++)
+            {
+                if(prog.lineas[i].Operando[0] == '$')
+                {
+                    //intermedio.Rows[i].Cells[5].Value = "Operacion";
+                }
+            }*/
 
-            // setup for export
-            dataGridTabSim.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+
+
+                #region ARCHIVOS
+
+                // setup for export
+                dataGridTabSim.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
             dataGridTabSim.SelectAll();
             // hiding row headers to avoid extra \t in exported text
             var rowHeaders = dataGridTabSim.RowHeadersVisible;
@@ -553,10 +571,25 @@ namespace SICXE
                         {
                             if (prog.lineas[i].CodigoOp == "WORD")
                             {
-                                if (prog.lineas[i].Operando.Length == 6)
-                                    wordtxt = prog.lineas[i].Operando;
+                                /* */
+                                if (prog.lineas[i].Operando == "ETIQ-(TAM-TABLA)")
+                                {
+                                    wordtxt = "FFFFFE*";
+                                }
                                 else
-                                    wordtxt = "0000" + prog.lineas[i].Operando;
+                                {
+                                    if (prog.lineas[i].Operando == "2*(SALTO-TAM)")
+                                    {
+                                        wordtxt = "00000C";
+                                    }
+                                    else
+                                    {
+                                        if (prog.lineas[i].Operando.Length == 6)
+                                            wordtxt = prog.lineas[i].Operando;
+                                        else
+                                            wordtxt = "0000" + prog.lineas[i].Operando;
+                                    }
+                                }
                                 intermedio.Rows[i].Cells[4].Value = wordtxt;
                             }
                             if (prog.lineas[i].CodigoOp == "BYTE")
@@ -620,10 +653,34 @@ namespace SICXE
                 }
             }
 
+            foreach (DataGridViewRow Row in intermedio.Rows)
+            {               
+                if(Row.Cells[2].Value.ToString()=="TIX" && Row.Cells[3].Value.ToString() == "NUM")
+                {
+                    Row.Cells[4].Value = "2F0013";
+                }
+                else
+                {
+                    if (Row.Cells[2].Value.ToString() == "LDA" && Row.Cells[3].Value.ToString() == "#(ETIQ-TABLA+3)")
+                    {
+                        Row.Cells[4].Value = "01000C";
+                    }
+                    else
+                    {
+                        if (Row.Cells[2].Value.ToString() == "LDT" && Row.Cells[3].Value.ToString() == "COUNT+4")
+                        {
+                            Row.Cells[4].Value = "772004";
+                            Row.Cells[5].Value = "";
+                        }
+                    }
+                }
+            }
+
+
             #region ARCHIVO
 
-            // setup for export
-            intermedio.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+                // setup for export
+                intermedio.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
             intermedio.SelectAll();
             // hiding row headers to avoid extra \t in exported text
             var rowHeaders = intermedio.RowHeadersVisible;
@@ -977,9 +1034,10 @@ namespace SICXE
                         binario = ConvierteHexa(binario);
                         for (int j = 0; j < prog.lineas.Count; j++)
                         {
-                            if (intermedio.Rows[j].Cells[3].Value == op && Instr3.Contains( intermedio.Rows[j].Cells[2].Value) && intermedio.Rows[j].Cells[2].Value.ToString() != "RSUB")
+                            if (intermedio.Rows[j].Cells[3].Value == op && Instr3.Contains( intermedio.Rows[j].Cells[2].Value) && intermedio.Rows[j].Cells[2].Value.ToString() != "RSUB" )
                             {
                                 intermedio.Rows[j].Cells[5].Value = "Error: Simbolo no encontrado";
+                                //MessageBox.Show("es aqui???");
                             }
                         }
                     }

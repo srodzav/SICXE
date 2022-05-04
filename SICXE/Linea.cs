@@ -118,13 +118,26 @@ namespace SICXE {
                             }
                             else
                             {
-                                n = "1";
-                                i = "1";
-                                x = "0";
-                                b = "0";
-                                p = "0";
-                                e = "0";
-                                Operando = Convert.ToInt32(valores[2]).ToHex();
+                                try
+                                {
+                                    n = "1";
+                                    i = "1";
+                                    x = "0";
+                                    b = "0";
+                                    p = "0";
+                                    e = "0";
+                                    Operando = Convert.ToInt32(valores[2]).ToHex();
+                                }
+                                catch
+                                {
+                                    n = "1";
+                                    i = "1";
+                                    x = "0";
+                                    b = "0";
+                                    p = "0";
+                                    e = "0";
+                                    Operando = valores[2];
+                                }
                             }
                         }
                     }
