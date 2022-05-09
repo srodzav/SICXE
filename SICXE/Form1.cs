@@ -1122,6 +1122,7 @@ namespace SICXE
             }
         }
 
+        
         public string ConvierteHexa(string binario)
         {
             string hexa = "";
@@ -1335,5 +1336,15 @@ namespace SICXE
 
         #endregion
 
+        #region CARGADOR
+
+        private void cargadorToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MapaMemoria mm = new MapaMemoria(tbRegistros.Lines, LongPrograma);
+            mm.Show();
+        }
+
+
+        #endregion
     }
 }

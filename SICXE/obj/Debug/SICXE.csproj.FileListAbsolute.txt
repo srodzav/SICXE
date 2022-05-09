@@ -98,3 +98,4 @@ C:\Users\Cesar\Desktop\SICXE-main\SICXE\obj\Debug\SICXE.csproj.CoreCompileInputs
 C:\Users\Cesar\Desktop\SICXE-main\SICXE\obj\Debug\SICXE.csproj.CopyComplete
 C:\Users\Cesar\Desktop\SICXE-main\SICXE\obj\Debug\SICXE.exe
 C:\Users\Cesar\Desktop\SICXE-main\SICXE\obj\Debug\SICXE.pdb
+C:\CODE\LAB\SICXE\SICXE\obj\Debug\SICXE.MapaMemoria.resources
