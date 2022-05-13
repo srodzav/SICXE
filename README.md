@@ -9,11 +9,12 @@
 - Código objeto
 - Registros
 - Errores en Paso 2
+- Implementacion de directiva EQU
+
+###### Cargador - Ligador de memoria
+- Cargador a memoria
 
 ## W.I.P.
 
-- Implementacion de directiva EQU, ORG, USE
+- Implementacion de directiva ORG, USE
 - Bloques
-- Cargador a memoria
-
-  
