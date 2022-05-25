@@ -247,6 +247,7 @@ namespace SICXE
             }
         }
 
+        
         private void btnEnsamblar_Click(object sender, EventArgs e)
         {
             analizarCódigoToolStripMenuItem.PerformClick();
@@ -1122,6 +1123,7 @@ namespace SICXE
             }
         }
 
+        
         public string ConvierteHexa(string binario)
         {
             string hexa = "";
@@ -1142,6 +1144,36 @@ namespace SICXE
             }
             return res;
         }
+
+        private void cargarOtroArchivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog
+            {
+                InitialDirectory = Application.StartupPath,
+                Filter = "Archivo SIC|*.s"
+            };
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                ruta = Directory.GetParent(open.FileName).ToString();
+                tbRegistros.Lines = File.ReadAllLines(open.FileName);
+                int Long = tbRegistros.Width;
+
+                if (tbRegistros.Text[0] == '2' && tbRegistros.Text[1] == '0' && tbRegistros.Text[2] == '1' && tbRegistros.Text[3] == '2' && Long == 238)
+                {
+                    MapaMemoria mm = new MapaMemoria();
+                    mm.Show();
+                }
+                else
+                {
+                    MapaMemoria mm = new MapaMemoria(tbRegistros.Lines, LongPrograma);
+                    mm.Show();
+                }
+
+            }
+        }
+
+
+
 
         #region REGISTROS
 
@@ -1335,5 +1367,50 @@ namespace SICXE
 
         #endregion
 
+        #region CARGADOR
+
+        private void cargadorToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+<<<<<<< HEAD
+            
+            try
+            {
+                MapaMemoria mm = new MapaMemoria(tbRegistros.Lines, LongPrograma);
+                mm.Show();
+            }
+            catch
+            {
+                OpenFileDialog open = new OpenFileDialog
+                {
+                    InitialDirectory = Application.StartupPath,
+                    Filter = "Archivo SIC|*.s"
+                };
+                if (open.ShowDialog() == DialogResult.OK)
+                {
+                    ruta = Directory.GetParent(open.FileName).ToString();
+                    tbRegistros.Lines = File.ReadAllLines(open.FileName);
+                    int Long = tbRegistros.Width;
+
+                    if(tbRegistros.Text[0] == '2' && tbRegistros.Text[1] == '0' && tbRegistros.Text[2] == '1' && tbRegistros.Text[3] == '2'  && Long ==238)
+                    {
+                        MapaMemoria mm = new MapaMemoria();
+                        mm.Show();
+                    }
+                    else
+                    {
+                        MapaMemoria mm = new MapaMemoria(tbRegistros.Lines, LongPrograma);
+                        mm.Show();
+                    }
+                    
+                }
+            }
+=======
+            MapaMemoria mm = new MapaMemoria(tbRegistros.Lines, LongPrograma);
+            mm.Show();
+>>>>>>> e62345c310b273d41a8eb9493a71ef38b2fc3d78
+        }
+
+
+        #endregion
     }
 }

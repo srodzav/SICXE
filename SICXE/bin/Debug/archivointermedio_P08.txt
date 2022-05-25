@@ -1,5 +1,5 @@
 CP	Etiqueta	Instrucción	Operando	Codigo Objeto	Errores
-000000	EXPRESIONES	START	0	----	
+000000	PRAC	START	0	----	
 000000	TABLA	RESW	000003	----	
 000009	NUM	EQU	19	----	
 000009	ETIQ	CLEAR	X	B410	

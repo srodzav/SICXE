@@ -1,6 +1,6 @@
-C:\Users\Cesar\Desktop\SICXE-main\SICXE\obj\Debug\GramaticaLexer.cs
-C:\Users\Cesar\Desktop\SICXE-main\SICXE\obj\Debug\GramaticaParser.cs
-C:\Users\Cesar\Desktop\SICXE-main\SICXE\obj\Debug\GramaticaListener.cs
-C:\Users\Cesar\Desktop\SICXE-main\SICXE\obj\Debug\GramaticaBaseListener.cs
-C:\Users\Cesar\Desktop\SICXE-main\SICXE\obj\Debug\GramaticaVisitor.cs
-C:\Users\Cesar\Desktop\SICXE-main\SICXE\obj\Debug\GramaticaBaseVisitor.cs
+C:\CODE\LAB\SICXE\SICXE\obj\Debug\GramaticaLexer.cs
+C:\CODE\LAB\SICXE\SICXE\obj\Debug\GramaticaParser.cs
+C:\CODE\LAB\SICXE\SICXE\obj\Debug\GramaticaListener.cs
+C:\CODE\LAB\SICXE\SICXE\obj\Debug\GramaticaBaseListener.cs
+C:\CODE\LAB\SICXE\SICXE\obj\Debug\GramaticaVisitor.cs
+C:\CODE\LAB\SICXE\SICXE\obj\Debug\GramaticaBaseVisitor.cs
